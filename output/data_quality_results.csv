@@ -1,0 +1,6 @@
+rule_name,severity,source_file,source_row_number
+enrollment_date_mandatory,ERROR,AUS.xlsx,3
+dob_parseable,WARNING,USA.xlsx,2
+dob_parseable,WARNING,USA.xlsx,3
+dob_parseable,WARNING,USA.xlsx,4
+dob_parseable,WARNING,AUS.xlsx,2

@@ -1,0 +1,49 @@
+{
+  "batch_id": "4e8d820b-e345-406a-950e-30f485ca7443",
+  "as_of": "2026-11-23",
+  "source_row_count": 9,
+  "latest_member_count": 9,
+  "country_counts": {
+    "AU": 3,
+    "IND": 3,
+    "USA": 3
+  },
+  "dq_failed_rule_count": 2,
+  "rules": [
+    {
+      "rule_name": "member_id_mandatory",
+      "severity": "ERROR",
+      "failed_row_count": 0
+    },
+    {
+      "rule_name": "member_name_mandatory",
+      "severity": "ERROR",
+      "failed_row_count": 0
+    },
+    {
+      "rule_name": "enrollment_date_mandatory",
+      "severity": "ERROR",
+      "failed_row_count": 1
+    },
+    {
+      "rule_name": "invalid_member_tier",
+      "severity": "WARNING",
+      "failed_row_count": 0
+    },
+    {
+      "rule_name": "dob_parseable",
+      "severity": "WARNING",
+      "failed_row_count": 4
+    },
+    {
+      "rule_name": "last_flight_parseable",
+      "severity": "WARNING",
+      "failed_row_count": 0
+    },
+    {
+      "rule_name": "member_id_duplicate_within_country",
+      "severity": "WARNING",
+      "failed_row_count": 0
+    }
+  ]
+}

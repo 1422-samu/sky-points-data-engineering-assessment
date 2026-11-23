@@ -1,0 +1,3 @@
+batch_id,member_id,feed_date,txn_id,txn_date,partner,miles_redeemed,status
+4e8d820b-e345-406a-950e-30f485ca7443,223457,2024-01-15,RX10091,20240110,AeroLink,12000,COMPLETED
+4e8d820b-e345-406a-950e-30f485ca7443,223457,2024-01-15,RX10092,20240113,SkyPoints,5000,PENDING

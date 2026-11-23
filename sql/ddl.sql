@@ -1,0 +1,68 @@
+-- SkyPoints Snowflake DDL
+CREATE DATABASE IF NOT EXISTS SKYPOINTS;
+CREATE SCHEMA IF NOT EXISTS SKYPOINTS.MEMBER_PLATFORM;
+USE SCHEMA SKYPOINTS.MEMBER_PLATFORM;
+
+CREATE TABLE IF NOT EXISTS RAW_MEMBER_PROFILE (
+    source_file VARCHAR,
+    source_row_number INTEGER,
+    raw_record VARIANT,
+    country VARCHAR,
+    ingested_at TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP(),
+    load_batch VARCHAR
+);
+
+CREATE TABLE IF NOT EXISTS STAGING_MEMBER_PROFILE (
+    batch_id VARCHAR,
+    member_id VARCHAR,
+    member_name VARCHAR,
+    enrollment_date DATE,
+    last_flight_date DATE,
+    tier_code VARCHAR,
+    agent_name VARCHAR,
+    state VARCHAR,
+    country VARCHAR,
+    dob DATE,
+    is_active VARCHAR,
+    individual_or_corporate VARCHAR,
+    age INTEGER,
+    stale_member BOOLEAN,
+    source_file VARCHAR,
+    source_row_number INTEGER,
+    loaded_at TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP(),
+    UNIQUE_KEY VARCHAR
+);
+
+CREATE TABLE IF NOT EXISTS RAW_REDEMPTION_JSON (
+    batch_id VARCHAR,
+    member_id VARCHAR,
+    feed_date DATE,
+    raw_json VARIANT,
+    ingested_at TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP()
+);
+
+CREATE TABLE IF NOT EXISTS REDEMPTION_TRANSACTION (
+    batch_id VARCHAR,
+    member_id VARCHAR,
+    feed_date DATE,
+    txn_id VARCHAR,
+    txn_date DATE,
+    partner VARCHAR,
+    miles_redeemed NUMBER(38,0),
+    status VARCHAR,
+    ingested_at TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP(),
+    PRIMARY KEY (txn_id)
+);
+
+CREATE TABLE IF NOT EXISTS TARGET_INDIA LIKE STAGING_MEMBER_PROFILE;
+CREATE TABLE IF NOT EXISTS TARGET_USA LIKE STAGING_MEMBER_PROFILE;
+CREATE TABLE IF NOT EXISTS TARGET_AUSTRALIA LIKE STAGING_MEMBER_PROFILE;
+
+CREATE TABLE IF NOT EXISTS DATA_QUALITY_RESULT (
+    batch_id VARCHAR,
+    rule_name VARCHAR,
+    severity VARCHAR,
+    failed_row_count NUMBER,
+    details VARIANT,
+    checked_at TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP()
+);

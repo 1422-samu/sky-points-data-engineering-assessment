@@ -1,0 +1,31 @@
+-- Insert these results before promoting staging rows to targets.
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'member_id_mandatory', 'ERROR', COUNT(*), OBJECT_CONSTRUCT('batch_id','BATCH_ID')
+FROM STAGING_MEMBER_PROFILE WHERE member_id IS NULL;
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'member_name_mandatory', 'ERROR', COUNT(*), OBJECT_CONSTRUCT('batch_id','BATCH_ID')
+FROM STAGING_MEMBER_PROFILE WHERE member_name IS NULL OR TRIM(member_name)='';
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'enrollment_date_mandatory', 'ERROR', COUNT(*), OBJECT_CONSTRUCT('batch_id','BATCH_ID')
+FROM STAGING_MEMBER_PROFILE WHERE enrollment_date IS NULL;
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'invalid_country', 'ERROR', COUNT(*), OBJECT_CONSTRUCT('countries', ARRAY_AGG(DISTINCT country))
+FROM STAGING_MEMBER_PROFILE WHERE country NOT IN ('IND','USA','AU','CAN','PHIL');
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'duplicate_member_id', 'WARNING', COUNT(*), OBJECT_CONSTRUCT('duplicate_ids', ARRAY_AGG(member_id))
+FROM (
+    SELECT member_id
+    FROM STAGING_MEMBER_PROFILE
+    WHERE member_id IS NOT NULL
+    GROUP BY member_id
+    HAVING COUNT(*) > 1
+);
+
+INSERT INTO DATA_QUALITY_RESULT
+SELECT 'BATCH_ID', 'stale_member', 'WARNING', COUNT(*), OBJECT_CONSTRUCT('batch_id','BATCH_ID')
+FROM STAGING_MEMBER_PROFILE WHERE stale_member = TRUE;

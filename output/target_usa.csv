@@ -1,0 +1,4 @@
+batch_id,member_id,member_name,enrollment_date,last_flight_date,tier_code,agent_name,state,country,dob,is_active,individual_or_corporate,age,stale_member,source_file,source_row_number,unique_key
+4e8d820b-e345-406a-950e-30f485ca7443,1,Sam,2022-06-15,2022-08-20,PLT,,,USA,,A,,,True,USA.xlsx,2,4e8d820b-e345-406a-950e-30f485ca7443:1:USA.xlsx:2
+4e8d820b-e345-406a-950e-30f485ca7443,2,John,2022-01-05,2022-01-15,SLV,,,USA,,A,,,True,USA.xlsx,3,4e8d820b-e345-406a-950e-30f485ca7443:2:USA.xlsx:3
+4e8d820b-e345-406a-950e-30f485ca7443,3,Mike,2021-12-28,2021-12-30,GLD,,,USA,,A,,,True,USA.xlsx,4,4e8d820b-e345-406a-950e-30f485ca7443:3:USA.xlsx:4
